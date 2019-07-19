@@ -26,8 +26,12 @@
       // statusChangeCallback(response);
       if(response.status === 'connected'){
         document.querySelector('#authBtn').value = 'Logout';
+        FB.api('/me', function(resp){
+      	  document.querySelector('#name').innerHTML = 'welcome' + resp.name;
+        });
       } else {
         document.querySelector('#authBtn').value = 'Login';
+        document.querySelector('#name').innerHTML = '';
       }
     }
 
@@ -80,7 +84,7 @@
         checkLoginStatus(res);
       });
     }
-  ">
+  "> <span id="name"></span>
   <h1><a href="index.html" style="color:orange;text-decoration:underline;">NORMALIST</a></h1>
   <div id="grid">
     <ol>
