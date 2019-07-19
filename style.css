@@ -22,7 +22,7 @@ body{
   padding-top: 0px;
 }
 a {
-  color: skyblue;
+  color: #0F52BA;
   text-decoration: none;
 }
 @media(max-width: 800px){

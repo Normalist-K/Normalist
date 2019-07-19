@@ -10,11 +10,77 @@
 
     gtag('config', 'UA-143685249-1');
   </script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
   <title>Youngin's Normalist</title>
   <meta charset="utf-8">
   <link rel="stylesheet" href="style.css">
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+  <script src="colors.js"></script>
+  <script>
+
+    var checkLoginStatus = function(response) {
+      console.log(response);
+      // statusChangeCallback(response);
+      if(response.status === 'connected'){
+        document.querySelector('#authBtn').value = 'Logout';
+      } else {
+        document.querySelector('#authBtn').value = 'Login';
+      }
+    }
+
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '705215369937843',
+        cookie     : true,  // enable cookies to allow the server to access
+                            // the session
+        xfbml      : true,  // parse social plugins on this page
+        version    : 'v3.3' // The Graph API version to use for the call
+      });
+
+      // Now that we've initialized the JavaScript SDK, we call
+      // FB.getLoginStatus().  This function gets the state of the
+      // person visiting this page and can return one of three states to
+      // the callback you provide.  They can be:
+      //
+      // 1. Logged into your app ('connected')
+      // 2. Logged into Facebook, but not your app ('not_authorized')
+      // 3. Not logged into Facebook and can't tell if they are logged into
+      //    your app or not.
+      //
+      // These three cases are handled in the callback function.
+
+      FB.getLoginStatus(checkLoginStatus);
+
+    };
+    // Load the SDK asynchronously
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
 </head>
 <body>
+  <input type="button" id="authBtn" value="checking..." onclick="
+    if(this.value === 'Login'){
+      // now logout
+      FB.login(function(res){
+        console.log('login =>', res);
+        checkLoginStatus(res);
+      });
+    } else {
+      // now login
+      FB.logout(function(res){
+        console.log('logout =>', res);
+        checkLoginStatus(res);
+      });
+    }
+  ">
   <h1><a href="index.html" style="color:orange;text-decoration:underline;">NORMALIST</a></h1>
   <div id="grid">
     <ol>
@@ -26,6 +92,7 @@
     <h2><font color="blue">[Hello! New NORMALIST]</font></h2>
   -->
     <div id="article">
+      <input type="button" value="night" onclick="NDHandler(this);">
       <h2>[Hello! New NORMALIST]</h2>
       <p>
         <strong><u>NORMALIST</u></strong> is the <u>brand</u> that <strong>we make</strong><br>
